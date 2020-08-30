@@ -1,0 +1,2 @@
+# Chrome_Data_Extractor
+When you use Chrome it store your data for betterment of your experience Like it store your History,Cookies,Password in Sqlite database file this program simply connect to the database and make csv file So that You Can See it. The passwords are encrypted So we are using some python library to decrypt it Chrome is updating day by day so encryption also changing so all passwords may not decrypt but it can decrypt most of them
